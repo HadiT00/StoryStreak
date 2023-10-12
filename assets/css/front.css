@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f6f6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #1F1F1F;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+#logo{
+    height: 120px;
+    width: 171px;
+    top: 15px;
+    left: 0;
+    position: absolute;
+}
+
+.post {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.verhaalTitel {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.verhaal {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.schrijverInfo {
+    font-size: 14px;
+    color: #666;
+}
+
+.schrijver {
+    font-weight: bold;
+}
+
+.datum {
+    font-style: italic;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.copyright {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#profileIcon {
+    height: 50px;
+    width: 50px;
+    top: 50px;
+    right: 100px;
+    position: absolute;
+}
+
+.comments {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.comment {
+    margin-bottom: 10px;
+}
+
+.commenter {
+    font-weight: bold;
+}
+
+.likeButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.likeButton:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid #4CAF50;
+}
