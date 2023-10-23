@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front</title>
-    <link href="./assets/css/front.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-    
+<template>
+  <body>
     <header class="header">
         <div class="container">
-            <a href="./front.html" >
-                <img src="./assets/image/StoryStreak_Logo.png" id="logo" alt="Logo">
-            </a>
+            <router-link to="/" >
+                <img src="../assets/image/StoryStreak_Logo.png" id="logo" alt="Logo">
+            </router-link>
             <h1>StoryStreak</h1>
             <nav class="nav">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><router-link to="/">Home</router-link></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><input id="search" type="search" placeholder="Search for someone" aria-label="Look up a user"><button>Search</button></a></li>
+                    <li><input id="search" type="search" placeholder="Search for someone" aria-label="Look up a user"><button>Search</button></li>
+                    <li><router-link to="/Login">Login</router-link></li>
                 </ul>
             </nav>
-            <img src="./assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">
+            <img src="../assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">
         </div>
     </header>
 
@@ -43,7 +36,8 @@
                     <span class="commenter">Wim:</span>
                     <p>SPONGEBOOOOB</p>
                 </div>
-                <button class="likeButton">Like</button>            </div>
+                <button class="likeButton">Like</button>            
+            </div>
         </section>
 
         <section class="post">
@@ -64,6 +58,14 @@
             <div class="schrijverInfo">
                 Posted by <span class="schrijver">Matijs</span> on <span class="datum">9 oktober 2023</span>
             </div>
+
+            <div id="app">
+                <div v-for="(comment, index) in comments" :key="index" class="comment">
+                    {{ comment }}
+                </div>
+                <input v-model="newComment" @keyup.enter="addComment" placeholder="Add a comment...">
+                <button @click="addComment">Add Comment</button>
+            </div>
             
         </section>
         
@@ -75,4 +77,26 @@
         </div>
     </footer>
 </body>
-</html>
+</template>
+
+<script>
+import "../assets/css/front.css"
+export default {
+  name: 'HomePage',
+  data() {
+    return {
+        comments: [],
+        newcomments: ""
+    };
+  },
+  
+  methods: {
+    addComment() {
+        if (this.newComment.trim() !== '') {
+            this.comments.push(this.newComment);
+            this.newComment = '';
+        }
+    }
+  }
+}
+</script>

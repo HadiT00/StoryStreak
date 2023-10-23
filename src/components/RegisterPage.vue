@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="./assets/css/register.css" rel="stylesheet" type="text/css">
-</head>
+<template>
 <body>
     <header class="header">
         <div class="container">
-            <a href="./front.html" >
-                <img src="./assets/image/StoryStreak_Logo.png" id="logo" alt="Logo">
-            </a>
+            
+        <img src="../assets/image/StoryStreak_Logo.png" id="logo" alt="Logo">
+            
             <h1>StoryStreak</h1>
             <nav class="nav">
                 <ul>
-                    <li><a href="./loginPage.html">Login</a></li>
+                    <li><router-link to="/Login">Already got an account? -> Login</router-link></li>
                 </ul>
             </nav>
         </div>
-    </header>        <img src="./assets/image/StoryStreak_Logo.png" id="logo" alt="Logo">
-    </a>
+    </header>        
     
     <div class="box">
         <h1 id="title">
@@ -28,6 +20,14 @@
         </h1>
 
         <form action="php" method="post">
+            <label for="Email" id="mail">
+            E-mail
+            </label>
+            <br>
+            <br>
+            <input type="email" required id="Email" name="Email" placeholder="E-mail">
+            <br>
+            <br>
             <label for="username" id="user" required>
                 Username
             </label>
@@ -44,9 +44,9 @@
             <input type="password" id="Password" name="Password" placeholder="Password" required>
             <br>
             <br>
-            <a href="./loginPage.html">
+            <router-link to="./loginPage.html">
                 <input id="registerButton" type="submit" value="Register">
-            </a>
+            </router-link>
         </form>
         <br>
     </div>
@@ -60,4 +60,27 @@
     </footer>
 
 </body>
-</html>
+
+</template>
+  
+  <script>
+  import "../assets/css/front.css"
+  export default {
+    name: 'RegisterPage',
+    data() {
+      return {
+          comments: [],
+          newcomments: ""
+      };
+    },
+    
+    methods: {
+      addComment() {
+          if (this.newComment.trim() !== '') {
+              this.comments.push(this.newComment);
+              this.newComment = '';
+          }
+      }
+    }
+  }
+  </script>
