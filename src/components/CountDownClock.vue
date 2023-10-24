@@ -8,7 +8,7 @@
 export default {
 data() {
     return {
-    timeRemaining: "00:00:00"
+    timeRemaining: "00:00:00",
     };
 },
 mounted() {
@@ -17,14 +17,14 @@ mounted() {
 },
 methods: {
     updateClock() {
-    const now = new Date();
-    const belgiumTimezoneOffset = 2; // Belgium is UTC+2
-    now.setHours(now.getHours() + belgiumTimezoneOffset);
-    const hours = 23 - now.getHours();
-    const minutes = 59 - now.getMinutes();
-    const seconds = 59 - now.getSeconds();
-    this.timeRemaining = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
+        const now = new Date();
+        const belgiumTimezoneOffset = 0; // Belgium is UTC+2
+        now.setHours(now.getHours() + belgiumTimezoneOffset);
+        const hours = 23 - now.getHours();
+        const minutes = 59 - now.getMinutes();
+        const seconds = 59 - now.getSeconds();
+        this.timeRemaining = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    },
 }
 };
 </script>

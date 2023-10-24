@@ -18,9 +18,9 @@ const routes = [
     component: () => import('../components/RegisterPage.vue')
   },
   {
-    path: '/CountDownClock',
-    name: 'CountDownClock',
-    component: () => import('../components/CountDownClock.vue')
+    path: '/RandomTopic',
+    name: 'RandomTopic',
+    component: () => import('../components/RandomTopic.vue')
   },
   
 ]
