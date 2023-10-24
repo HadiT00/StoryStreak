@@ -20,6 +20,33 @@
     </header>
 
     <main class="container">
+
+
+
+        <h1>
+            <CountDownClock></CountDownClock>
+        </h1>
+
+        <h3>
+            Today's topic:
+        </h3>
+
+        <h2>
+            TOPIC
+        </h2>
+
+        <section class="post">
+            <textarea name="welcomeMessage" rows="20" cols="155">
+            </textarea>
+        </section>
+
+        <button>
+            Submit Story
+        </button>
+
+        <br>
+        <br>
+
         <section class="post">
             <h2 class="verhaalTitel">SpongeBob</h2>
             <p class="verhaal">
@@ -81,22 +108,23 @@
 
 <script>
 import "../assets/css/front.css"
+import CountDownClock from "./CountDownClock.vue";
 export default {
-  name: 'HomePage',
-  data() {
-    return {
-        comments: [],
-        newcomments: ""
-    };
-  },
-  
-  methods: {
-    addComment() {
-        if (this.newComment.trim() !== '') {
-            this.comments.push(this.newComment);
-            this.newComment = '';
+    name: 'HomePage',
+    data() {
+        return {
+            comments: [],
+            newcomments: ""
+        };
+    },
+    methods: {
+        addComment() {
+            if (this.newComment.trim() !== '') {
+                this.comments.push(this.newComment);
+                this.newComment = '';
+            }
         }
-    }
-  }
+    },
+    components: { CountDownClock }
 }
 </script>
