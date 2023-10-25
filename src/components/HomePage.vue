@@ -26,7 +26,7 @@
         </h1>
 
         <h2>
-            <RandomTopic></RandomTopic>
+            <RandomTopic @timerExpired="this.PostNewCurrentTopic(this.RandomNumberGenerator())"></RandomTopic>
         </h2>
 
         <section class="post">

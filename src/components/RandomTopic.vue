@@ -9,28 +9,45 @@
 export default {
   data() {
     return {
-      randomTopic: null,
+      randomTopic: '',
       topicID: this.RandomNumberGenerator(),
+      currentTopic: null,
     };
   },
-  mounted() {
-    this.getDataByID(this.topicID)
-    this.PostNewCurrentTopic(this.topicID)
-    console.log(this.RandomNumberGenerator())
+  async mounted() {
+    try {
+      this.currentTopic = await this.GetCurrentTopic();
+      this.getDataByID(this.currentTopic);
+
+      // this.$on("timerExpired", () => {
+      // console.log("timerExpired event received");
+      // this.PostNewCurrentTopic(CurrentTopic(this.RandomNumberGenerator()));
+      // });
+    } catch (error) {
+      console.error('Error in mounted:', error);
+    }
   },
   methods: {
-    getDataByID(topicID) {
-      fetch('https://matijseraly.be/api/topics/id?topicId=' + topicID)
+    getDataByID(currentTopic) {
+      // Use the topicID to construct the URL
+      const url = `https://matijseraly.be/api/topics/id?topicId=${currentTopic}`;
+
+      fetch(url)
         .then(response => {
           if (!response.ok) {
-            throw new Error("HTTP error! Status: ${response.status}");
+            throw new Error(`HTTP error! Status: ${response.status}`);
           }
           return response.json();
         })
-        .then((data) => {
-          // Handle the response data here
-          console.log(data[this.topicID - 1].topic);
-          this.randomTopic = data[this.topicID - 1].topic;
+        .then(data => {
+          // Access the topic with the given ID (e.g., topic ID 25)
+          const topic = data[currentTopic - 1];
+
+          if (topic) {
+            this.randomTopic = topic.topic;
+          } else {
+            console.error(`Topic with ID ${currentTopic} not found in the API response.`);
+          }
         })
         .catch(error => {
           // Handle any errors here
@@ -42,18 +59,33 @@ export default {
     },
     PostNewCurrentTopic(topicID)
     {
-        fetch("https://matijseraly.be/api/topics/current?topicId=" + topicID, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-        }).then(response => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-        });
-    }
+      fetch("https://matijseraly.be/api/topics/current?topicId=" + topicID, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+      }).then(response => {
+          return response.json();
+      })
+      .then((data) => {
+          console.log(data);
+      });
+    },
+    async GetCurrentTopic() {
+      try {
+        const response = await fetch('https://matijseraly.be/api/topics/current');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        const currentTopic = data.topicId;
+        console.log(currentTopic);
+        return currentTopic;
+      } catch (error) {
+        console.error('Error fetching current topic:', error);
+        throw error; // Rethrow the error to be caught in the mounted method
+      }
+    },
   },
 };
 </script>

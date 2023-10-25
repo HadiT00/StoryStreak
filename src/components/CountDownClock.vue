@@ -24,6 +24,11 @@ methods: {
         const minutes = 59 - now.getMinutes();
         const seconds = 59 - now.getSeconds();
         this.timeRemaining = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        if(hours === 0 && minutes === 0 && seconds === 0)
+        {
+            console.log("Emitting timerExpired event");
+            this.$emit("timerExpired");
+        }
     },
 }
 };
