@@ -2,8 +2,9 @@
     <div>
       <div class="clock">{{ timeRemaining }}</div>
     </div>
+    <!-- TESTING -->
 </template>
-  
+
 <script>
 export default {
 data() {
