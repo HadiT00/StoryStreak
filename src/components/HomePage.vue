@@ -21,18 +21,12 @@
 
     <main class="container">
 
-
-
         <h1>
             <CountDownClock></CountDownClock>
         </h1>
 
-        <h3>
-            Today's topic:
-        </h3>
-
         <h2>
-            TOPIC
+            <RandomTopic @timerExpired="this.PostNewCurrentTopic(this.RandomNumberGenerator())"></RandomTopic>
         </h2>
 
         <section class="post">
@@ -109,6 +103,7 @@
 <script>
 import "../assets/css/front.css"
 import CountDownClock from "./CountDownClock.vue";
+import RandomTopic from "./RandomTopic.vue";
 export default {
     name: 'HomePage',
     data() {
@@ -123,8 +118,8 @@ export default {
                 this.comments.push(this.newComment);
                 this.newComment = '';
             }
-        }
+        },
     },
-    components: { CountDownClock }
+    components: { CountDownClock, RandomTopic }
 }
 </script>
