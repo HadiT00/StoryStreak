@@ -22,7 +22,7 @@ const routes = [
     name: 'CountDownClock',
     component: () => import('../components/CountDownClock.vue')
   },
-  
+
 ]
 
 const router = createRouter({
