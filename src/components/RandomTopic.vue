@@ -18,7 +18,6 @@ export default {
     try {
       this.currentTopic = await this.GetCurrentTopic();
       this.getDataByID(this.currentTopic);
-
       // this.$on("timerExpired", () => {
       // console.log("timerExpired event received");
       // this.PostNewCurrentTopic(CurrentTopic(this.RandomNumberGenerator()));

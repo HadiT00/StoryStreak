@@ -17,6 +17,23 @@ mounted() {
     setInterval(this.updateClock, 1000);
 },
 methods: {
+    RandomNumberGenerator() {
+      return Math.floor(Math.random() * (101 - 2)) + 2;
+    },
+    PostNewCurrentTopic(topicID)
+    {
+      fetch("https://matijseraly.be/api/topics/current?topicId=" + topicID, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+      }).then(response => {
+          return response.json();
+      })
+      .then((data) => {
+          console.log(data);
+      });
+    },
     updateClock() {
         const now = new Date();
         const belgiumTimezoneOffset = 0; // Belgium is UTC+2
@@ -29,6 +46,10 @@ methods: {
         {
             console.log("Emitting timerExpired event");
             this.$emit("timerExpired");
+            this.PostNewCurrentTopic(this.RandomNumberGenerator());
+            setTimeout(() => {
+                window.location.reload();
+            }, 5);
         }
     },
 }
