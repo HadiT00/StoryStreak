@@ -62,12 +62,7 @@ export default {
   },
   methods: {
     async login() {
-		const registeraccount = {
-			username: this.username,
-			password: this.password,
-	};
-	console.log(registeraccount);
-
+		
 	try {
 		const existingUserResponse = await axios.get(`https://matijseraly.be/api/user?username=${this.username}&password=${this.password}`);
 		const correctUser = existingUserResponse.data;
@@ -78,7 +73,10 @@ export default {
 			alert("Username or Password are incorrect")
 		} else {
 			console.log("welkom")
-			this.$router.push('/');
+			this.$router.push({
+				name: 'Home',
+				query: { username: this.username },
+			});
 		}
 	} catch (error) {
 		console.error('Error:', error);
