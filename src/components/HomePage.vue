@@ -7,15 +7,19 @@
             </router-link>
             <h1>StoryStreak</h1>
             <nav class="nav">
-                <ul>
-                    <li><router-link to="/">Home</router-link></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><input id="search" type="search" placeholder="Search for someone" aria-label="Look up a user"><button>Search</button></li>
-                    <li><router-link to="/Login">Login</router-link></li>
-                </ul>
+                <div class="main-headers">
+                    <ul>
+                        <li><router-link to="/">Home</router-link></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><router-link to="/Login">Login</router-link></li>
+                    </ul>
+                </div>
             </nav>
             <img src="../assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">
+        </div>
+        <div class="search-box">
+            <input type="text" class="input-search" placeholder="Search for someone">
         </div>
     </header>
 
