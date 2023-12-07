@@ -11,7 +11,6 @@
                     <li><router-link to="/">Home</router-link></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><input id="search" type="search" placeholder="Search for someone" aria-label="Look up a user"><button>Search</button></li>
                     <li><router-link to="/Login">Logout</router-link></li>
                 </ul>
             </nav>
