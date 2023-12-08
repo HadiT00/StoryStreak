@@ -22,7 +22,11 @@ const routes = [
     name: 'RandomTopic',
     component: () => import('../components/RandomTopic.vue')
   },
-
+  {
+    path: '/ListOfUsers',
+    name: '/ListOfUsers',
+    component: () => import('../components/ListOfUsers.vue')
+  }
 ]
 
 const router = createRouter({

@@ -18,6 +18,7 @@
         </div>
         <div class="search-box">
             <input type="text" class="input-search" placeholder="Search for someone">
+            <a class="SearchButton"><router-link to="/ListOfUsers">Search</router-link></a>
         </div>
     </header>
 
