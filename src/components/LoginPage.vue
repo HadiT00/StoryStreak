@@ -77,6 +77,10 @@ export default {
 				name: 'Home',
 				query: { username: this.username },
 			});
+			this.$router.push({
+				name: 'ListOfUsers',
+				query: { username: this.username },
+			});
 		}
 	} catch (error) {
 		console.error('Error:', error);

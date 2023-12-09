@@ -30,8 +30,8 @@
             <div class="user-item">
                 <ul>
                     <li>
-                        <span>{{ username }}</span>
-                        <button id="addUserButton">ADD USER</button>
+                        {{ username }}
+                        <button @click="addUser(username)">Add user</button>
                     </li>
                 </ul>
             </div>
@@ -49,6 +49,10 @@ export default {
     },
     mounted() {
         this.PlaceUsersInList()
+    },
+    created() {
+        this.localUsername = this.$route.query.username;
+        console.log('Logged in as:', this.localUsername);
     },
     methods: {
         PlaceUsersInList() {
@@ -75,7 +79,10 @@ export default {
                 // Handle any errors here
                 console.error('Error:', error);
             });
-        }
+        },
+        addUser(name) {        
+            console.log(name);
+        },
     },
 }
 </script>
