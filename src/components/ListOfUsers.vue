@@ -2,7 +2,7 @@
     <body>
         <header class="header">
             <div class="container">
-                <router-link to="/" >
+                <router-link to="/">
                     <img src="../assets/image/StoryStreak_Logo.png" id="logo" alt="Logo">
                 </router-link>
                 <h1>StoryStreak</h1>
