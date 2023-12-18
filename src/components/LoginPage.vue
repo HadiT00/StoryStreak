@@ -72,15 +72,11 @@ export default {
 			console.log("Username not found")
 			alert("Username or Password are incorrect")
 		} else {
+			this.$router.push({
+                name: 'Home',
+            });
+			localStorage.setItem('username', this.username);
 			console.log("welkom")
-			this.$router.push({
-				name: 'Home',
-				query: { username: this.username },
-			});
-			this.$router.push({
-				name: 'ListOfUsers',
-				query: { username: this.username },
-			});
 		}
 	} catch (error) {
 		console.error('Error:', error);

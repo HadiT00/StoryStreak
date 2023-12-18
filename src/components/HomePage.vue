@@ -11,7 +11,7 @@
                     <li><router-link to="/">Home</router-link></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><router-link to="/Login">Logout</router-link></li>
+                    <li><a @click="logout">Logout</a></li>
                 </ul>
             </nav>
             <img src="../assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">
@@ -82,10 +82,13 @@ export default {
         };
     },
     created() { // Get username
-    // Access the username from the query parameter
-        this.localUsername = this.$route.query.username;
+        // Access the username from the query parameter
+        this.localUsername = localStorage.getItem('username');
         console.log('Username is:', this.localUsername);
         this.getUserIdByUsername();
+
+        // Call the checkAuthentication function when the component is created
+        this.checkAuthentication();
 
     },
     async mounted() {
@@ -111,6 +114,7 @@ export default {
             const test = data[key];
             // Now you have the userId, you can use it as needed
             console.log('User ID:', test.id);
+            localStorage.setItem('userId', test.id);
             return test.id
             } else {
             console.error('Error getting userId. Status:', response.status);
@@ -223,7 +227,24 @@ export default {
             this.title = '';
             this.content = '';
             this.datum = new Date().toLocaleDateString('en-GB');
-        }
+        },
+        checkAuthentication() {
+            // Check if the username is undefined in local storage
+            const username = localStorage.getItem('username');
+
+            if (username === undefined || username === null) {
+            // If username is undefined, navigate to the login page
+            this.$router.push('/Login');
+            }
+        },
+        logout() {
+            // Clear user information from local storage
+            localStorage.removeItem('username');
+            localStorage.removeItem('userId');
+
+            // Navigate to the login page
+            this.$router.push('/Login');
+        },
     },
     components: { CountDownClock, RandomTopic },
 }
