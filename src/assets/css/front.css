@@ -155,7 +155,7 @@ body {
 .SearchButton {
     border: 4px solid white;
     background-color: white;
-    color: white; /* Set the text color to black */
+    color: black; /* Set the text color to black */
     font-family: Arial, sans-serif;
     margin-left: 5px;
     text-decoration: none;

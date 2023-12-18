@@ -18,14 +18,10 @@
             </div>
             <div class="search-box">
                 <input type="text" class="input-search" placeholder="Search for someone">
-                <a class="SearchButton"><router-link to="/ListOfUsers">Search</router-link></a>
+                <a class="SearchButton" @click="getInputtedUser()">Search</a>
             </div>
         </header>
         <h1>List of users matching: TESTING</h1>
-        <!-- <ul v-for="username in users" :key="username" id="listofusers">
-            <li>{{ username }}</li>             
-            <button>ADD USER</button>
-        </ul> -->
         <div v-for="username in users" :key="username" id="listofusers">
             <div class="user-item">
                 <ul>
@@ -53,6 +49,7 @@ export default {
     created() {
         this.localUsername = this.$route.query.username;
         console.log('Logged in as:', this.localUsername);
+        
     },
     methods: {
         PlaceUsersInList() {
@@ -82,6 +79,15 @@ export default {
         },
         addUser(name) {        
             console.log(name);
+        },
+        getInputtedUser() {
+            this.inputUser = document.querySelector('.input-search').value;
+            if (this.inputUser !== "") {
+                localStorage.setItem('searchedUser', this.inputUser);
+                this.$router.push('/ListOfUsers');
+            } else {
+                alert("Please enter a valid user");
+            }
         },
     },
 }

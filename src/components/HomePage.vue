@@ -18,7 +18,7 @@
         </div>
         <div class="search-box">
             <input type="text" class="input-search" placeholder="Search for someone">
-            <a class="SearchButton"><router-link to="/ListOfUsers">Search</router-link></a>
+            <a class="SearchButton" @click="getInputtedUser()">Search</a>
         </div>
     </header>
 
@@ -73,6 +73,7 @@ export default {
             content: '',
             datum: new Date().toLocaleDateString('en-GB'),
             localUsername: '',
+            inputUser: '',
             id: null,
             
             randomTopic: '',
@@ -117,6 +118,15 @@ export default {
         } catch (error) {
             console.error('Error getting userId:', error);
         }
+        },
+        getInputtedUser() {
+            this.inputUser = document.querySelector('.input-search').value;
+            if (this.inputUser !== "") {
+                localStorage.setItem('searchedUser', this.inputUser);
+                this.$router.push('/ListOfUsers');
+            } else {
+                alert("Please enter a valid user");
+            }
         },
         //Get Topic id 
         getDataByID(currentTopic) {
