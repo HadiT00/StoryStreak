@@ -11,7 +11,7 @@
                         <li><router-link to="/">Home</router-link></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><router-link to="/Login">Logout</router-link></li>
+                        <li><a @click="logout">Logout</a></li>
                     </ul>
                 </nav>
                 <img src="../assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">
@@ -51,8 +51,10 @@ export default {
         this.PlaceUsersInList()
     },
     created() {
-        this.localUsername = this.$route.query.username;
+        this.localUsername = localStorage.getItem('username');
         console.log('Logged in as:', this.localUsername);
+
+        this.checkAuthentication();
     },
     methods: {
         PlaceUsersInList() {
@@ -82,6 +84,23 @@ export default {
         },
         addUser(name) {        
             console.log(name);
+        },
+        checkAuthentication() {
+            // Check if the username is undefined in local storage
+            const username = localStorage.getItem('username');
+
+            if (username === undefined || username === null) {
+            // If username is undefined, navigate to the login page
+            this.$router.push('/Login');
+            }
+        },
+        logout() {
+            // Clear user information from local storage
+            localStorage.removeItem('username');
+            localStorage.removeItem('userId');
+
+            // Navigate to the login page
+            this.$router.push('/Login');
         },
     },
 }
