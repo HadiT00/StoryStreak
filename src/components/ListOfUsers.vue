@@ -11,7 +11,8 @@
                         <li><router-link to="/">Home</router-link></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a @click="logout">Logout</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#" @click="logout">Logout</a></li>
                     </ul>
                 </nav>
                 <img src="../assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">
@@ -21,13 +22,14 @@
                 <a class="SearchButton" @click="getInputtedUser()">Search</a>
             </div>
         </header>
-        <h1>List of users matching: TESTING</h1>
+        <h1>List of users matching: {{ inputtedUserStorage }}</h1>
         <div v-for="username in users" :key="username" id="listofusers">
             <div class="user-item">
                 <ul>
                     <li>
                         {{ username }}
-                        <button @click="addUser(username)">Add user</button>
+                        <button @click="addUser(username)" v-if="isAlreadyFriends(id_of_inputted_user) !== true">Add user</button>
+                        <span v-else>Already friends</span>
                     </li>
                 </ul>
             </div>
@@ -40,16 +42,24 @@ export default {
     name: 'ListOfUsers',
     data() {
         return {
-            users: []
+            users: [],
+            inputUser: "",
+            inputtedUserStorage: "",
+            userID: "",
+            id_of_inputted_user: "",
+            friendsList: []
         };
     },
     mounted() {
         this.PlaceUsersInList()
+        this.PlaceFriendsInList()
+        this.isAlreadyFriends()
+        this.inputtedUserStorage = localStorage.getItem('searchedUser');
+        this.userID = localStorage.getItem('userId');
     },
     created() {
         this.localUsername = localStorage.getItem('username');
         console.log('Logged in as:', this.localUsername);
-
         this.checkAuthentication();
     },
     methods: {
@@ -67,19 +77,71 @@ export default {
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
                     const username = data[i].username;
-                    if(username !== null) {
+                    if(username !== null && username.toLowerCase().includes(this.inputtedUserStorage.toLowerCase())) {
                         this.users.push(username);
                     }
                 }  
-                console.log(this.users)
+                console.log(this.users);
             })
             .catch(error => {
                 // Handle any errors here
                 console.error('Error:', error);
             });
         },
-        addUser(name) {        
-            console.log(name);
+        PlaceFriendsInList()
+        {
+            const url = `https://matijseraly.be/api/follower?userId=43`;
+
+            fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    const friendID = data[i];
+                    if(friendID !== null && !this.friendsList.includes(friendID)) {
+                        this.friendsList.push(friendID);
+                    }
+                }
+                console.log(this.friendsList);
+            })
+            .catch(error => {
+                // Handle any errors here
+                console.error('Error:', error);
+            });
+        },
+        isAlreadyFriends(id_of_inputted_user)
+        {
+            console.log(id_of_inputted_user);
+        },
+        addUser(name) {  
+            const url = `https://matijseraly.be/api/user/username?username=${name}`;
+
+            fetch(url)
+                .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+                })
+                .then(data => {
+                    this.id_of_inputted_user = data[Object.keys(data)[0]].id;
+                    fetch(`https://matijseraly.be/api/follows?followingUserId=${this.userID}&followedUserId=${this.id_of_inputted_user}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    }).then(response => {
+                        return response.json();
+                    });
+                })
+                .catch(error => {
+                // Handle any errors here
+                console.error('Error:', error);
+            });
         },
         checkAuthentication() {
             // Check if the username is undefined in local storage
@@ -102,7 +164,7 @@ export default {
             this.inputUser = document.querySelector('.input-search').value;
             if (this.inputUser !== "") {
                 localStorage.setItem('searchedUser', this.inputUser);
-                this.$router.push('/ListOfUsers');
+                location.reload()
             } else {
                 alert("Please enter a valid user");
             }

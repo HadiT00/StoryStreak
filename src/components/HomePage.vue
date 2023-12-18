@@ -163,18 +163,18 @@ export default {
         },
         PostNewCurrentTopic(topicID)
         {
-        fetch("https://matijseraly.be/api/topics/current?topicId=" + topicID, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-        }).then(response => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-            
-        });
+            fetch("https://matijseraly.be/api/topics/current?topicId=" + topicID, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                
+            });
         },
         async GetCurrentTopic() {
         try {
