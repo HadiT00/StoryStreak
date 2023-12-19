@@ -11,7 +11,7 @@
                         <li><router-link to="/">Home</router-link></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="#">My Account</a></li>
+                        <li><a href="/MyAccount">My Account</a></li>
                         <li><a href="#" @click="logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -110,32 +110,6 @@ export default {
             // Handle any errors here
             console.error('Error:', error);
             });
-        },
-        isAlreadyFriends()
-        {
-            // for (let i = 0; i < this.users.length; i++)
-            // {
-            //     for (let x = 0; x < this.friendsList.length; x++)
-            //     {
-            //         if  (this.users[i].toLowerCase() === this.friendsList[x].toLowerCase())
-            //         {
-            //             this.friendsListTrueFalse.push("true");
-            //             break;
-            //         }
-            //         else
-            //         {
-            //             this.friendsListTrueFalse.push("false");
-            //             break;
-            //         }
-            //     }
-            // }
-            // console.log(this.friendsListTrueFalse);
-
-            // for (let i = 0; i < this.users.length; i++)
-            // {
-            //     console.log(this.users[i]);
-            // }
-            // console.log("test")
         },
         addUser(name) {  
             const url = `https://matijseraly.be/api/user/username?username=${name}`;
