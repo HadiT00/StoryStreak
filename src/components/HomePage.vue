@@ -48,7 +48,16 @@
                 <button type="submit" class="submitStoryButton">Submit</button>
             </form>
         </section>
-        
+
+        <div v-for="(story, index) in stories" :key="story.id" class="post-card">
+            <div class="post-content">
+                <h3 class="post-title">Title: {{ story.title }}</h3>
+                <p class="post-body">Story: {{ story.content }}</p>
+                <p class="post-username" v-if="userInfos[index]">Posted by: {{ userInfos[index].username }}</p>
+
+            </div>
+        </div>
+            
     </main>
    
     <footer class="footer">
@@ -79,6 +88,12 @@ export default {
             randomTopic: '',
             topicID: this.RandomNumberGenerator(),
             currentTopic: null,
+
+            stories: [],
+
+            username: null,
+
+            userInfos: [],
         };
     },
     created() { // Get username
@@ -99,6 +114,7 @@ export default {
         // console.log("timerExpired event received");
         // this.PostNewCurrentTopic(CurrentTopic(this.RandomNumberGenerator()));
         // });
+        this.fetchStories();
         } catch (error) {
         console.error('Error in mounted:', error);
         }
@@ -245,6 +261,33 @@ export default {
             // Navigate to the login page
             this.$router.push('/Login');
         },
+        async fetchStories() {
+        try {
+            const userId = await this.getUserIdByUsername();
+            console.log("pull for: ", userId)
+
+            const response = await axios.get(`https://matijseraly.be/api/followerstories?userId=${userId}`);
+            this.stories = response.data;
+            // get posted by
+            this.userInfos = [];
+            // Fetch user information for each story
+            for (const story of this.stories) {
+                const userResponse = await axios.get(`https://matijseraly.be/api/user/id?userId=${story.user_id}`);
+                const userInfo = userResponse.data;
+                const key = Object.keys(userInfo)[0];
+                const test = userInfo[key];
+                // Add user information to the array
+                this.userInfos.push({
+                    userId: story.user_id,
+                    username: test.username
+                });
+            }
+            //console.log(this.userInfos);
+        } catch (error) {
+            console.error('Error fetching stories:', error);
+        }
+        },
+        
     },
     components: { CountDownClock, RandomTopic },
 }
