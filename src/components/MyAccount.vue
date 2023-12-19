@@ -45,9 +45,7 @@
                 </ul>
             </div>
         </div>
-            
-
-                    <!-- Button to get followed users -->
+            <!-- Button to get followed users -->
             <button class="navigation-button" @click="toggleFollowedUsers">
             {{ showFollowedUsers ? 'Hide' : 'Get' }} Followed Users
             </button>
@@ -57,7 +55,10 @@
             <h2>People You Follow</h2>
             <ul class="list_of_followed">
                 <li v-for="user in followedUsers" :key="user.id">
-                <p>{{ user.username }}</p>
+                    {{ user.username }}
+                    <button @click="removeUser(user.username)">Remove user</button>
+                    <br>
+                    <br>
                 </li>
             </ul>
             </div>
@@ -202,6 +203,10 @@ export default {
             await this.getFollowedUsers();
         }
         },
+        removeUser(userName)
+        {
+            console.log(userName)
+        }
     },
 }
 </script>
