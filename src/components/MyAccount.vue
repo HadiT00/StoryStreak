@@ -32,15 +32,20 @@
             </button>
 
             <!-- Display stories only if showStories is true -->
-            <div v-if="showStories">
-            <h2>Your Stories</h2>
-            <ul>
-                <li v-for="story in stories" :key="story.id">
-                <h3>Title: {{ story.title }}</h3>
-                <p>Content: {{ story.content }}</p>
-                </li>
-            </ul>
+        <div v-if="showStories">
+            <div v-if="this.stories !== 'story not found'">
+                <h2>Your Stories</h2>
+                <ul>
+                    <li v-for="story in stories" :key="story.id">
+                    <h3>Title: {{ story.title }}</h3>
+                    <p>Content: {{ story.content }}</p>
+                    <br>
+                    <p>----------------------------------------------------------</p>
+                    </li>
+                </ul>
             </div>
+        </div>
+            
 
                     <!-- Button to get followed users -->
             <button class="navigation-button" @click="toggleFollowedUsers">
@@ -50,7 +55,7 @@
             <!-- Display followed users -->
             <div v-if="showFollowedUsers && followedUsers.length > 0">
             <h2>People You Follow</h2>
-            <ul>
+            <ul class="list_of_followed">
                 <li v-for="user in followedUsers" :key="user.id">
                 <p>{{ user.username }}</p>
                 </li>
@@ -166,7 +171,7 @@ export default {
             // Fetch stories if showStories is true and stories array is empty
             if (this.showStories && this.stories.length === 0) {
                 this.showMyStories();
-        }
+            }
         },
         async getFollowedUsers() {
         try {

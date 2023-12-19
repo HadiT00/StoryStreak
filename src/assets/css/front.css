@@ -212,3 +212,8 @@ body {
   .navigation-button:hover {
     background-color: #45a049;
   }
+
+.list_of_followed {
+    color: black;
+    margin-right: 40px;
+}
