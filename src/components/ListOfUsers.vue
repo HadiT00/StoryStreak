@@ -28,7 +28,7 @@
                 <ul>
                     <li>
                         {{ username }}
-                        <button @click="addUser(username)" v-if="isAlreadyFriends(id_of_inputted_user) !== true">Add user</button>
+                        <button @click="addUser(username)" v-if="!friendsList.includes(username)">Add user</button>
                         <span v-else>Already friends</span>
                     </li>
                 </ul>
@@ -45,17 +45,16 @@ export default {
             users: [],
             inputUser: "",
             inputtedUserStorage: "",
-            userID: "",
+            userID: localStorage.getItem('userId'),
             id_of_inputted_user: "",
-            friendsList: []
+            friendsList: [],
+            friendsListTrueFalse: []
         };
     },
     mounted() {
         this.PlaceUsersInList()
         this.PlaceFriendsInList()
-        this.isAlreadyFriends()
         this.inputtedUserStorage = localStorage.getItem('searchedUser');
-        this.userID = localStorage.getItem('userId');
     },
     created() {
         this.localUsername = localStorage.getItem('username');
@@ -81,41 +80,62 @@ export default {
                         this.users.push(username);
                     }
                 }  
-                console.log(this.users);
+                console.log("Displayed users:" + this.users);
             })
             .catch(error => {
                 // Handle any errors here
                 console.error('Error:', error);
             });
         },
-        PlaceFriendsInList()
-        {
-            const url = `https://matijseraly.be/api/follower?userId=43`;
-
-            fetch(url)
+        PlaceFriendsInList() {
+        const url = `https://matijseraly.be/api/followernames?userId=${this.userID}`;
+        fetch(url)
             .then(response => {
-                if (!response.ok) {
+            if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
+            }
+            return response.json();
             })
             .then(data => {
-                for (let i = 0; i < data.length; i++) {
-                    const friendID = data[i];
-                    if(friendID !== null && !this.friendsList.includes(friendID)) {
-                        this.friendsList.push(friendID);
+                for (let i = 0; i < data.length; i++)
+                {
+                    if  (data[i].username !== null)
+                    {
+                        this.friendsList.push(data[i].username)
                     }
                 }
-                console.log(this.friendsList);
+                console.log("Current friends of user:" + this.friendsList)
             })
             .catch(error => {
-                // Handle any errors here
-                console.error('Error:', error);
+            // Handle any errors here
+            console.error('Error:', error);
             });
         },
-        isAlreadyFriends(id_of_inputted_user)
+        isAlreadyFriends()
         {
-            console.log(id_of_inputted_user);
+            // for (let i = 0; i < this.users.length; i++)
+            // {
+            //     for (let x = 0; x < this.friendsList.length; x++)
+            //     {
+            //         if  (this.users[i].toLowerCase() === this.friendsList[x].toLowerCase())
+            //         {
+            //             this.friendsListTrueFalse.push("true");
+            //             break;
+            //         }
+            //         else
+            //         {
+            //             this.friendsListTrueFalse.push("false");
+            //             break;
+            //         }
+            //     }
+            // }
+            // console.log(this.friendsListTrueFalse);
+
+            // for (let i = 0; i < this.users.length; i++)
+            // {
+            //     console.log(this.users[i]);
+            // }
+            // console.log("test")
         },
         addUser(name) {  
             const url = `https://matijseraly.be/api/user/username?username=${name}`;
@@ -135,6 +155,7 @@ export default {
                         "Content-Type": "application/json"
                     },
                     }).then(response => {
+                        location.reload();
                         return response.json();
                     });
                 })

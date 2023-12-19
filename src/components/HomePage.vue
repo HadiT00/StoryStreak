@@ -11,6 +11,7 @@
                     <li><router-link to="/">Home</router-link></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
+                    <li><a href="#">My Account</a></li>
                     <li><a @click="logout">Logout</a></li>
                 </ul>
             </nav>
