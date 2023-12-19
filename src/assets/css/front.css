@@ -192,3 +192,23 @@ body {
   font-size: 1rem;
   color: #555;
 }
+
+
+.button-container {
+    text-align: center;
+  }
+  
+  .navigation-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .navigation-button:hover {
+    background-color: #45a049;
+  }
