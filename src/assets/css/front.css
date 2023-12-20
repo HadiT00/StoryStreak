@@ -153,12 +153,13 @@ body {
 }
 
 .SearchButton {
-    border: 4px solid white;
-    background-color: white;
-    color: black; /* Set the text color to black */
+    border: 4px solid black;
+    background-color: black;
+    color: white; /* Set the text color to black */
     font-family: Arial, sans-serif;
     margin-left: 5px;
     text-decoration: none;
+    font-size: 15px;
 }
 
 #listofusers {
@@ -201,8 +202,8 @@ body {
   .navigation-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: black;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -210,10 +211,26 @@ body {
   }
   
   .navigation-button:hover {
-    background-color: #45a049;
+    background-color: black;
   }
 
 .list_of_followed {
     color: black;
     margin-right: 40px;
+}
+
+#imgSSTeam {
+    width: 500px;
+    margin-right: 1010px;
+}
+
+.contact_text {
+    text-align: left;
+}
+
+.right_side_info {
+    text-align: right;
+    position: absolute;
+    margin-top: -700px;
+    margin-left: 1200px;
 }

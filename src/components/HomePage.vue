@@ -9,10 +9,10 @@
             <nav class="nav">
                 <ul>
                     <li><router-link to="/">Home</router-link></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><router-link to="/AboutPage">About</router-link></li>
+                    <li><router-link to="/ContactPage">Contact</router-link></li>
                     <li><router-link to="/MyAccount">My Account</router-link></li>
-                    <li><a @click="logout">Logout</a></li>
+                    <li><a @click="logout" href="#">Logout</a></li>
                 </ul>
             </nav>
             <img src="../assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">

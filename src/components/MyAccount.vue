@@ -9,10 +9,10 @@
               <nav class="nav">
                   <ul>
                         <li><router-link to="/">Home</router-link></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><router-link to="/About">About us</router-link></li>
+                        <li><router-link to="/ContactPage">Contact</router-link></li>
                         <li><router-link to="/MyAccount">My Account</router-link></li>
-                        <li><a @click="logout">Logout</a></li>
+                        <li><a @click="logout" href="#">Logout</a></li>
                   </ul>
               </nav>
               <img src="../assets/image/profile_icon.png" id="profileIcon" alt="Icon of profile">
@@ -87,6 +87,7 @@ export default {
             showStories: false,
             followedUsers: [],
             showFollowedUsers: false,
+            userID: localStorage.getItem('userId')
         };
     },
     created() { // Get username
@@ -205,7 +206,15 @@ export default {
         },
         removeUser(userName)
         {
-            console.log(userName)
+            fetch(`https://matijseraly.be/api/delete?id=${this.userID}&name=${userName}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            }).then(response => {
+                location.reload();
+                return response.json();
+            });
         }
     },
 }

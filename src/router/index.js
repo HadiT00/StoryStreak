@@ -31,6 +31,16 @@ const routes = [
     path: '/MyAccount',
     name: 'MyAccount',
     component: () => import('../components/MyAccount.vue')
+  },
+  {
+    path: '/ContactPage',
+    name: 'ContactPage',
+    component: () => import('../components/ContactPage.vue')
+  },
+  {
+    path: '/AboutPage',
+    name: 'AboutPage',
+    component: () => import('../components/AboutPage.vue')
   }
 ]
 

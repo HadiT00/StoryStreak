@@ -9,8 +9,8 @@
                 <nav class="nav">
                     <ul>
                         <li><router-link to="/">Home</router-link></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><router-link to="/About">About us</router-link></li>
+                        <li><router-link to="/ContactPage">Contact</router-link></li>
                         <li><a href="/MyAccount">My Account</a></li>
                         <li><a href="#" @click="logout">Logout</a></li>
                     </ul>
