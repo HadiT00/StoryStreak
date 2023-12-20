@@ -9,7 +9,7 @@
               <nav class="nav">
                   <ul>
                         <li><router-link to="/">Home</router-link></li>
-                        <li><router-link to="/About">About us</router-link></li>
+                        <li><router-link to="/AboutPage">About Us</router-link></li>
                         <li><router-link to="/ContactPage">Contact</router-link></li>
                         <li><router-link to="/MyAccount">My Account</router-link></li>
                         <li><a @click="logout" href="#">Logout</a></li>
@@ -19,7 +19,7 @@
           </div>
           <div class="search-box">
               <input type="text" class="input-search" placeholder="Search for someone">
-              <a class="SearchButton" @click="getInputtedUser()">Search</a>
+              <button class="SearchButton" @click="getInputtedUser()">Search</button>
           </div>
       </header>
 
@@ -56,7 +56,7 @@
             <ul class="list_of_followed">
                 <li v-for="user in followedUsers" :key="user.id">
                     {{ user.username }}
-                    <button @click="removeUser(user.username)">Remove user</button>
+                    <button @click="removeUser(user.username)" id="remove_user_button">Remove user</button>
                     <br>
                     <br>
                 </li>

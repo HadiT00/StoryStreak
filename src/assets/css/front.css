@@ -19,6 +19,7 @@ body {
     display: flex;
     align-items: center;
     position: relative;
+    margin-top: -60px;
 }
 
 .header h1 {
@@ -153,8 +154,9 @@ body {
 }
 
 .SearchButton {
-    border: 4px solid black;
+    border: 1px solid grey;
     background-color: black;
+    padding: 5px 10px;
     color: white; /* Set the text color to black */
     font-family: Arial, sans-serif;
     margin-left: 5px;
@@ -233,4 +235,31 @@ body {
     position: absolute;
     margin-top: -700px;
     margin-left: 1200px;
+}
+
+#add_user_button {
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#remove_user_button {
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.input-search {
+    border-radius: 10px;
+    height: 15px;
 }

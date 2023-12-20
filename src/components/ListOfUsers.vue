@@ -9,9 +9,9 @@
                 <nav class="nav">
                     <ul>
                         <li><router-link to="/">Home</router-link></li>
-                        <li><router-link to="/About">About us</router-link></li>
+                        <li><router-link to="/AboutPage">About Us</router-link></li>
                         <li><router-link to="/ContactPage">Contact</router-link></li>
-                        <li><a href="/MyAccount">My Account</a></li>
+                        <li><router-link to="/MyAccount">My Account</router-link></li>
                         <li><a href="#" @click="logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -19,7 +19,7 @@
             </div>
             <div class="search-box">
                 <input type="text" class="input-search" placeholder="Search for someone">
-                <a class="SearchButton" @click="getInputtedUser()">Search</a>
+                <button class="SearchButton" @click="getInputtedUser()">Search</button>
             </div>
         </header>
         <h1>List of users matching: {{ inputtedUserStorage }}</h1>
@@ -28,7 +28,7 @@
                 <ul>
                     <li>
                         {{ username }}
-                        <button @click="addUser(username)" v-if="!friendsList.includes(username)">Add user</button>
+                        <button @click="addUser(username)" v-if="!friendsList.includes(username)" id="add_user_button">Add user</button>
                         <span v-else>Already friends</span>
                     </li>
                 </ul>

@@ -9,9 +9,9 @@
                 <nav class="nav">
                     <ul>
                         <li><router-link to="/">Home</router-link></li>
-                        <li><router-link to="/AboutPage">About</router-link></li>
+                        <li><router-link to="/AboutPage">About Us</router-link></li>
                         <li><router-link to="/ContactPage">Contact</router-link></li>
-                        <li><a href="/MyAccount">My Account</a></li>
+                        <li><router-link to="/MyAccount">My Account</router-link></li>
                         <li><a href="#" @click="logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -19,10 +19,11 @@
             </div>
             <div class="search-box">
                 <input type="text" class="input-search" placeholder="Search for someone">
-                <a class="SearchButton" @click="getInputtedUser()">Search</a>
+                <button class="SearchButton" @click="getInputtedUser()">Search</button>
             </div>
         </header>
-        <h1>Contact the StoryStreak team!</h1>
+        <h1>Having trouble?</h1>
+        <h2>Contact the StoryStreak team!</h2>
         <img id="imgSSTeam" src="../assets/image/TheStoryStreakTeam.png" alt="The StoryStreak Team">
         <div class="contact_text">
             <h3>Beautiful picture of our 3 founders</h3>
