@@ -52,6 +52,17 @@
 				</form>
 			</div>
 		</div>
+		<div class="popup" id="popup">
+			<img src="../assets/image/404-tick.png" id="image_check_mark">
+			<br>
+			<br>
+			<h2>Thank You!</h2>
+			<br>
+			<p>We have sent a verification to your mail!</p>
+			<br>
+			<input type="text" class="input-search_2" placeholder="Enter code here">
+			<button type="button" id="button2fa" @click="checkCode()">Check code</button>
+		</div>
 	</div>
     </div>
 </template>
@@ -68,9 +79,12 @@ data() {
     return {
         comments: [],
         newcomments: "",
-		username: "",
-		mail: "",
-		password: "",
+		codeInput: "",
+		registeraccount: {
+            username: "",
+            password: "",
+            mail: ""
+        }
     };
 },
 
@@ -81,13 +95,23 @@ methods: {
             this.newComment = '';
         }
     },
+	openPopup() {
+		let popup = document.getElementById('popup');
+
+		popup.classList.add("open-popup");
+	},
+	closePopup() {
+		let popup = document.getElementById('popup');
+		popup.classList.remove("open-popup");
+	},
 	async registerUser() {
-		const registeraccount = {
+		
+		this.registeraccount = {
 			username: this.username,
 			password: this.password,
-			mail: this.mail,
-	};
-	console.log(registeraccount);
+			mail: this.mail
+		};
+	console.log(this.registeraccount);
 
 	try {
 		const existingUserResponse = await axios.get(`https://matijseraly.be/api/user/username?username=${this.username}`);
@@ -95,10 +119,35 @@ methods: {
 
 		if (existingUser === "user not found") {
 			// User doesn't exist, proceed with registration
-			const response = await axios.post('https://matijseraly.be/api/user', registeraccount);
-			console.log('Response:', response.data);
-			this.$router.push('/login');
-		} else {
+			// 2FA Validation
+			if (this.username !== undefined && this.password !== undefined && this.mail !== undefined)
+			{
+				const url = `https://matijseraly.be/api/mail?mail=${this.mail}&name=${this.username}`;
+
+				fetch(url)
+					.then(response => {
+					if (!response.ok) {
+						throw new Error(`HTTP error! Status: ${response.status}`);
+					}
+					return response.json();
+					})
+					.then(data => {
+						console.log(data);
+					})
+					.catch(error => {
+					// Handle any errors here
+					console.error('Error:', error);
+					});
+
+				let popup = document.getElementById('popup');
+				popup.classList.add("open-popup");
+			}
+			else
+			{
+				alert("Please fill in all the register fields")
+			}
+		}
+		else {
 			console.log("User already exists");
 			alert('User already exists')
 		}
@@ -106,6 +155,41 @@ methods: {
 		console.error('Error:', error);
 	}
 	},
+	checkCode()
+	{
+		this.codeInput = document.querySelector('.input-search_2').value;
+		if (this.codeInput !== "") {
+			
+			const url = `https://matijseraly.be/api/codecheck?code=${this.codeInput}`;
+
+			fetch(url)
+				.then(response => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				return response.json();
+				})
+				.then(data => {
+					if	(data.message == "Activation code is valid")
+					{
+						const response = axios.post('https://matijseraly.be/api/user', this.registeraccount);
+						console.log('Response:', response.data);
+						this.$router.push('/login');
+					}
+					else
+					{
+						alert("Code is invalid");
+					}
+				})
+				.catch(error => {
+				// Handle any errors here
+				console.error('Error:', error);
+				});
+			console.log("good code")
+		} else {
+			alert("No code was given");
+		}
+	}
 }
 }
 </script>

@@ -263,3 +263,51 @@ body {
     border-radius: 10px;
     height: 15px;
 }
+
+.submitStoryButton {
+    border: 1px solid grey;
+    background-color: black;
+    padding: 5px 10px;
+    color: white; /* Set the text color to black */
+    font-family: Arial, sans-serif;
+}
+
+.popup {
+    width: 400px;
+    background: black;
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 50px;
+    color: white;
+    z-index: 1;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.open-popup {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
+}
+
+#button2fa {
+    border: 1px solid grey;
+    background-color: black;
+    padding: 5px 10px;
+    color: white; /* Set the text color to black */
+    font-family: Arial, sans-serif;
+    margin-left: 10px;
+}
+
+.input-search_2 {
+    border-radius: 8px;
+    height: 20px;
+}
+
+#image_check_mark {
+    width: 100px;
+}
